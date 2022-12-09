@@ -62,6 +62,7 @@ testLabels <- to_categorical(testy)
 
 
 ```{r}
+set.seed(1)
 model <- keras_model_sequential()
 model %>%
   layer_conv_2d(filters = 32,
@@ -115,14 +116,19 @@ history <- model %>%
 ```{r}
 model %>% evaluate(train, trainLabels)
 pred <- model %>% predict(train) %>% k_argmax()
-predArr <- np_array(pred)
-predArr <- reticulate::py_to_r(predArr) 
-accuracy <- function(pred, truth)
-  mean(drop(pred) == drop(truth))
+# Y_pred = round(pred)
+# CM = table(Y_pred, trainy)
+
+
+
+# predArr <- np_array(pred)
+# predArr <- reticulate::py_to_r(predArr) 
+# accuracy <- function(pred, truth)
+#   mean(drop(pred) == drop(truth))
 
 # accuracy(predArr, train) 
 
-# table(Predicted = predArr, Actual = trainy)
+# table(Predicted = pred, Actual = trainy)
 ```
 
 
